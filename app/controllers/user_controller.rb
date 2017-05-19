@@ -1,0 +1,5 @@
+class FiguresController < ApplicationController
+
+  
+
+end
