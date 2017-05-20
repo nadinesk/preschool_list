@@ -1,4 +1,4 @@
-<h1> Welcome </h1>
+<h1> Welcome, <%= @user.username %></h1>
 <% if @preschools.size == 0 || !@preschools %>
 	<h3> You haven't added any preschools yet</h3>
 <% else %>

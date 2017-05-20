@@ -1,27 +1,19 @@
 class PreschoolsController < ApplicationController
 
 	get '/preschools' do    
-    	binding.pry
+    	
 	    if session[:user_id]
+
+	      @user = User.find(session[:user_id])
+	      
+	      
 	      @preschools = Preschool.all 
 	      erb :'preschools/preschools'
 	    else
 	      redirect to '/login'
 	    end
 	 end
-    
-	get '/users/:slug' do
-		if session[:user_id]      		
-			
-      		@user = User.find_by_slug(params[:slug])
-      		binding.pry
-      		@preschool = Preschool.find_by(:user_id => @user.id)      
-      		erb :'preschools/user_preschools'
-    	else
-      		redirect "/login"
-    	end
-    	erb :'preschools/user_preschools'
-  	end
+    	
 
   	get '/preschools/new' do
     	if session[:user_id]
@@ -32,7 +24,7 @@ class PreschoolsController < ApplicationController
     end
 
     post '/preschools/new' do
-    	binding.pry
+    	
     	if params[:name] == "" || params[:address] == "" || params[:cost] == "" || params[:summary] == ""
       		redirect "preschools/new"
     	else
@@ -48,7 +40,7 @@ class PreschoolsController < ApplicationController
     	if session[:user_id]
       		@preschool = Preschool.find(params[:id])
       		@user = User.find(@preschool.user_id)
-      		binding.pry
+      		
       
       		erb :'preschools/show'
     	else

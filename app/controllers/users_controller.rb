@@ -23,7 +23,6 @@ class UsersController < ApplicationController
     
   end
 
- 
   get "/login" do
     if session[:user_id]
       redirect "/preschools"
@@ -50,6 +49,19 @@ class UsersController < ApplicationController
       redirect "/"
     end
   end
+
+  get '/users/:slug' do
+    if session[:user_id]          
+      
+          @user = User.find_by_slug(params[:slug])
+          binding.pry
+          @preschool = Preschool.find_by(:user_id => @user.id)      
+          erb :'preschools/user_preschools'
+      else
+          redirect "/login"
+      end
+      erb :'preschools/user_preschools'
+    end
 
  
 
