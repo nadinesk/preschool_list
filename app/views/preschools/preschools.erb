@@ -1,7 +1,4 @@
-<h1> Welcome!</h1>
-<a href="/preschools/new"><button type="button">Add Preschool</button></a>
-<br>
-<a href="/logout"><button type="button">Sign out</button></a>
+<h1> Welcome, <%=current_user.username %></h1>
 
 <h3> Here is a list of preschools all users have added </h3> 
 	<% @preschools.all.each do |preschool| %>

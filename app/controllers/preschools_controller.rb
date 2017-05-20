@@ -61,8 +61,7 @@ class PreschoolsController < ApplicationController
 
   	end
 
-  	patch '/preschools/:id' do      
-  		binding.pry
+  	patch '/preschools/:id' do        		
       	@preschool =  Preschool.find_by_id(params[:id])
       	if params[:name] == "" || params[:address] == "" || params[:cost] == "" || params[:summary] == ""     
         	redirect to("/preschools/#{@preschool.id}/edit")

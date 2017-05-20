@@ -1,8 +1,8 @@
 <ul>
-	<li id="preschool_name"><label>Preschool: </label><%= @preschool.name %> </li><br>
-	<li><label id="label">Address: </label><%= @preschool.address %> </li><br>
-	<li><label id="label">Cost: </label><%= @preschool.cost %> </li><br>
-	<li><label id="label">Summary: </label><%= @preschool.summary %> </li><br>
+	<li id="preschool_name"><label>Preschool: </label><%= @preschool.name %> </li>
+	<li><label id="label">Address: </label><%= @preschool.address %> </li>
+	<li><label id="label">Cost: </label><%= @preschool.cost %> </li>
+	<li><label id="label">Summary: </label><%= @preschool.summary %> </li>
 
 </ul>
   
@@ -10,6 +10,7 @@
   	<input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Preschool">
   </form>
-  <br>
+  
 
-<a href="/preschools/<%=@preschool.id%>/edit"><button type="button">Edit Preschool</button></a>
+<a href="/preschools/<%=@preschool.id%>/edit"> <input type="submit" value="Edit Preschool"></a>
+<a href="/users/<%=current_user.slug%>"> <input type="submit" value="View Your Preschool List"></a>

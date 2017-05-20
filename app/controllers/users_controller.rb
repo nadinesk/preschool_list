@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
+    binding.pry
     @user = User.find_by_slug(params[:slug])          
     @preschool = Preschool.find_by(:user_id => @user.id)      
     if session[:user_id] && (session[:user_id] == @user.id)
