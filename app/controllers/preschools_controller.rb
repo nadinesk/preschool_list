@@ -9,9 +9,20 @@ class PreschoolsController < ApplicationController
 	      redirect to '/login'
 	    end
 	 end
+    @genres = []
 
+    @song = Song.find_by_slug(params[:slug])
+    
 	get '/users/:slug' do
-    	erb :'preschools/show'
+		if session[:user_id]      		
+			binding.pry
+      		@user = User.find_by_slug(params[:slug])
+      		@preschool = Preschool.find_by(:user_id => @user.id)      
+      		erb :'preschools/show'
+    	else
+      		redirect "/login"
+    	end
+    	erb :'preschools/user_preschools'
   	end
 
   	get '/preschools/new' do
@@ -80,5 +91,7 @@ class PreschoolsController < ApplicationController
       		redirect to '/login'
      	end   
   	end
+
+  	
 
 end
