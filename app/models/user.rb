@@ -6,10 +6,12 @@ class User < ActiveRecord::Base
 
   def slug
     username.downcase.gsub(" ", "-")
+    
   end
 
   def self.find_by_slug(slug)
     User.all.find{|a|  a.slug == slug }
+
   end
 
 end
