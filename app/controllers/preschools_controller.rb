@@ -2,7 +2,7 @@ class PreschoolsController < ApplicationController
 
 	get '/preschools' do    
     	
-	    if session[:user_id]
+	     if logged_in?
 
 	      @user = User.find(session[:user_id])
 
@@ -16,7 +16,7 @@ class PreschoolsController < ApplicationController
     	
 
   	get '/preschools/new' do
-    	if session[:user_id]
+    	 if logged_in?
       		erb :'preschools/create'
     	else
       		redirect "/login"
@@ -29,7 +29,8 @@ class PreschoolsController < ApplicationController
       		redirect "preschools/new"
     	else
       		@preschool = Preschool.create(:name => params[:name], :address => params[:address],:cost => params[:cost],:summary => params[:summary])
-      		@preschool.user_id = session[:user_id]
+      		
+      		@preschool.user_id = current_user.id
       		@preschool.save
       		redirect to("/preschools/#{@preschool.id}")
     	end
@@ -37,11 +38,9 @@ class PreschoolsController < ApplicationController
 
 
   	get '/preschools/:id' do
-    	if session[:user_id]
+    	if logged_in?
       		@preschool = Preschool.find(params[:id])
       		@user = User.find(@preschool.user_id)
-      		
-      
       		erb :'preschools/show'
     	else
       		redirect "/login"
@@ -49,15 +48,17 @@ class PreschoolsController < ApplicationController
   	end
 
   	get '/preschools/:id/edit' do
-	    if session[:user_id]
-	      @preschool = Preschool.find(params[:id])
-	      @user = User.find(@preschool.user_id)
-	      erb :'preschools/edit'
-	      
-	    else
-	      
-	      redirect "/login"
-	    end
+	     if logged_in?
+      		@preschool = Preschool.find_by_id(params[:id])
+      		@user = User.find(current_user.id)
+      		if @preschool.user_id == current_user.id
+       			erb :'preschools/edit'
+      		else
+        		redirect to '/preschools'
+      		end
+    	  else
+      		redirect to '/login'
+    	  end
 
   	end
 
@@ -75,14 +76,20 @@ class PreschoolsController < ApplicationController
   	end
 
   	delete '/preschools/:id/delete' do #delete action     
-     	@preschool = Preschool.find_by_id(params[:id])
-     	if session[:user_id] == @preschool.user_id      
-      		@preschool.delete
-      		redirect to '/preschools'
-     	else
+     	if logged_in?
+      		@preschool = Preschool.find_by_id(params[:id])
+      		if @preschool.user_id == current_user.id
+        		@preschool.delete
+       		 	redirect to '/preschools'
+      		else
+        		redirect to '/preschools'
+      		end
+    	else
       		redirect to '/login'
-     	end   
+    	end
   	end
+
+ 
 
   	
 
