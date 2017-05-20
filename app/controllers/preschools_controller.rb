@@ -5,12 +5,11 @@ class PreschoolsController < ApplicationController
 	     if logged_in?
 
 	      @user = User.find(session[:user_id])
-
 	      
 	      @preschools = Preschool.all 
 	      erb :'preschools/preschools'
 	    else
-	      redirect to '/login'
+	      redirect to '/'
 	    end
 	 end
     	

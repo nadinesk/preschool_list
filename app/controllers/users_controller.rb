@@ -22,9 +22,8 @@ class UsersController < ApplicationController
     end
     
   end
-
-  get "/login" do
-    if !logged_in?
+ get "/login" do
+    if session[:user_id]
       redirect "/preschools"
     else
       erb :'users/login'
@@ -41,12 +40,12 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/logout' do
-    if logged_in?
-      session.destroy
-      redirect to '/login'
+  get "/logout" do
+    if session[:user_id]
+      session.clear
+      redirect "/login"
     else
-      redirect to '/'
+      redirect "/"
     end
   end
 
