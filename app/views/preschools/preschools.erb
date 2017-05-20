@@ -1,11 +1,16 @@
 <h1> Welcome, <%= @user.username %></h1>
-<% if @preschools.size == 0 || !@preschools %>
-	<h3> You haven't added any preschools yet</h3>
-<% else %>
+<a href="/preschools/new"><button type="button">Add Preschool</button></a>
+<br>
+<a href="/logout"><button type="button">Sign out</button></a>
+
+<h3> Here is a list of preschools all users have added </h3> 
 	<% @preschools.all.each do |preschool| %>
-		<li><%= preschool.name %></li>
+	<ul>
+		<li id="preschool_name"><%= preschool.name %></li>
 		<li><%= preschool.address %></li>
 		<li><%= preschool.cost %></li>
 		<li><%= preschool.summary %></li>	
-	<% end %>
+	</ul>
+		<br>
+
 <% end %>
