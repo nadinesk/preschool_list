@@ -1,13 +1,15 @@
+<ul>
+	<li id="preschool_name"><label>Preschool: </label><%= @preschool.name %> </li><br>
+	<li><label id="label">Address: </label><%= @preschool.address %> </li><br>
+	<li><label id="label">Cost: </label><%= @preschool.cost %> </li><br>
+	<li><label id="label">Summary: </label><%= @preschool.summary %> </li><br>
 
-	<li><%= @preschool.name %> </li>
-	<li><%= @preschool.address %> </li>
-	<li><%= @preschool.cost %> </li>
-	<li><%= @preschool.summary %> </li>
-
-
+</ul>
+  
   <form action="/preschools/<%= @preschool.id %>/delete" method="POST">
   	<input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Preschool">
   </form>
+  <br>
 
-<a href="/preschools/<%=@preschool.id%>/edit">Edit Tweet </a>
+<a href="/preschools/<%=@preschool.id%>/edit"><button type="button">Edit Preschool</button></a>

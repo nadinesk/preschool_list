@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
    post '/signup' do
-    binding.pry
+    
     if params[:username] == "" || params[:password] == "" || params[:email] == ""    
       redirect to '/signup'
     else
@@ -51,16 +51,16 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-    if session[:user_id]          
-      
-          @user = User.find_by_slug(params[:slug])
-          binding.pry
-          @preschool = Preschool.find_by(:user_id => @user.id)      
+    @user = User.find_by_slug(params[:slug])          
+    @preschool = Preschool.find_by(:user_id => @user.id)      
+    if session[:user_id] && (session[:user_id] == @user.id)
+        binding.pry  
           erb :'preschools/user_preschools'
       else
+
           redirect "/login"
       end
-      erb :'preschools/user_preschools'
+      
     end
 
  
