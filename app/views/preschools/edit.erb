@@ -1,0 +1,12 @@
+<form action="/preschools/<%= @preschool.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label><%=@user.username %></label>
+  <br><br>
+  <label><%=@preschool.name%></label><input type="text" name="name" value="<%= @preschool.name %>" placeholder="Name:">  
+  <label><%=@preschool.address%></label><input type="text" name="address" value="<%= @preschool.address %>" placeholder="Address:"><label><%=@preschool.cost%></label><input type="text" name="cost" value="<%= @preschool.cost %>" placeholder="Cost:">  
+  <label><%=@preschool.summary%></label><input type="text" name="cost" value="<%= @preschool.summary %>" placeholder="Summary:">  
+  
+
+  <input type="submit" value="submit">
+</form>
