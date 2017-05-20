@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    
+
     if !session[:user_id]
 
       erb :'users/signup'
@@ -23,9 +23,9 @@ class UsersController < ApplicationController
   end
 
   get '/preschools' do    
-    
+    binding.pry
     if session[:user_id]
-      @preschool = Preschool.all 
+      @preschools = Preschool.all 
       erb :'preschools/preschools'
     else
       redirect to '/login'
