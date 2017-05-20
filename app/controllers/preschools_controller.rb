@@ -49,9 +49,9 @@ class PreschoolsController < ApplicationController
 
   	get '/preschools/:id/edit' do
 	    if session[:user_id]
-	      @tweet = Tweet.find(params[:id])
-	      @user = User.find(@tweet.user_id)
-	      erb :'tweets/edit_tweet'
+	      @preschool = Preschool.find(params[:id])
+	      @user = User.find(@preschool.user_id)
+	      erb :'preschools/edit'
 	    else
 	      
 	      redirect "/login"
@@ -60,15 +60,25 @@ class PreschoolsController < ApplicationController
   	end
 
   	patch '/preschools/:id' do      
-      @preschool =  Preschool.find_by_id(params[:id])
-      if params[:name] == "" || params[:address] == "" || params[:cost] == "" || params[:summary] == ""     
-        redirect to("/preschools/#{@preschool.id}/edit")
-      else
-        @preschools.update(:name => params[:name], :address => params[:address],:cost => params[:cost],:summary => params[:summary])
-        @preschool.save
+      	@preschool =  Preschool.find_by_id(params[:id])
+      	if params[:name] == "" || params[:address] == "" || params[:cost] == "" || params[:summary] == ""     
+        	redirect to("/preschools/#{@preschool.id}/edit")
+      	else
+        	@preschools.update(:name => params[:name], :address => params[:address],:cost => params[:cost],:summary => params[:summary])
+	        @preschool.save
 
-        redirect to("/preschools/#{@preschool.id}")
-      end
-  end
+    	    redirect to("/preschools/#{@preschool.id}")
+      	end
+  	end
+
+  	delete '/preschools/:id/delete' do #delete action     
+     	@preschool = Preschool.find_by_id(params[:id])
+     	if session[:user_id] == @preschool.user_id      
+      		@preschool.delete
+      		redirect to '/preschools'
+     	else
+      		redirect to '/login'
+     	end   
+  	end
 
 end

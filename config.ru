@@ -6,7 +6,6 @@ end
 
 use Rack::MethodOverride
 
-
 use UsersController
 use PreschoolsController
 run ApplicationController
