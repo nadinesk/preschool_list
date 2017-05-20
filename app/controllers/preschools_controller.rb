@@ -4,7 +4,7 @@ class PreschoolsController < ApplicationController
     	
 	     if logged_in?
 
-	      @user = User.find(session[:user_id])
+	      #@user = User.find(session[:user_id])
 	      
 	      @preschools = Preschool.all 
 	      erb :'preschools/preschools'

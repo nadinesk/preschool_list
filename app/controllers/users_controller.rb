@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     
   end
  get "/login" do
-    if session[:user_id]
+    if logged_in?
       redirect "/preschools"
     else
       erb :'users/login'
