@@ -1,0 +1,11 @@
+<p>Welcome, <%= @user.username %></p>
+<p>Here is your list of preschools </p>
+<% @user.preschools.each do |preschool| %>
+	<ul>
+		<li id="preschool_name"><%= preschool.name %> </li>
+		<li><%= preschool.address %> </li>
+		<li><%= preschool.cost %> </li>
+		<li><%= preschool.summary %> </li>
+	</ul>
+<% end %>
+
