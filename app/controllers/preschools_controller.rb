@@ -67,9 +67,11 @@ class PreschoolsController < ApplicationController
   	delete '/preschools/:id/delete' do #delete action     
      	redirect_if_not_logged_in
       		@preschool = Preschool.find_by_id(params[:id])
-      		
+      		@preschool.delete
         	redirect to '/preschools'
       		
   	end
 
 end
+
+

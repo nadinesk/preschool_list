@@ -21,7 +21,8 @@ class UsersController < ApplicationController
     end
     
   end
- get "/login" do  
+ get "/login" do
+
     if logged_in?
       redirect "/preschools"
     else
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
     
     @user = User.find_by_slug(params[:slug])          
     @preschool = Preschool.find_by(:user_id => @user.id)      
-    if logged_in?        
+    if logged_in? && current_user == @user      
           erb :'preschools/user_preschools'
     else
       redirect "/login"
