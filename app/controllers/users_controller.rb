@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   get '/signup' do
 
     if !logged_in?
-
       erb :'users/signup'
     else
       redirect to '/preschools'
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
     end
     
   end
- get "/login" do
+ get "/login" do  
     if logged_in?
       redirect "/preschools"
     else
@@ -50,18 +49,16 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-    binding.pry
+    
     @user = User.find_by_slug(params[:slug])          
     @preschool = Preschool.find_by(:user_id => @user.id)      
-    if session[:user_id] && (session[:user_id] == @user.id)
-        binding.pry  
+    if logged_in?        
           erb :'preschools/user_preschools'
-      else
-
-          redirect "/login"
-      end
-      
+    else
+      redirect "/login"
     end
+      
+  end
 
  
 

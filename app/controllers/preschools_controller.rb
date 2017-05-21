@@ -4,7 +4,7 @@ class PreschoolsController < ApplicationController
 	     redirect_if_not_logged_in
 	      @preschools = Preschool.all 
 	      erb :'preschools/preschools'
-	    end
+	    
 	 end
     	
 
@@ -26,13 +26,13 @@ class PreschoolsController < ApplicationController
       redirect_if_not_logged_in
       unless Preschool.valid_params?(params)
         redirect "/preschools/new?error=invalid preschool entry"
-      
+      end
           @preschool = Preschool.create(:name => params[:name], :address => params[:address],:cost => params[:cost],:summary => params[:summary])
           
           @preschool.user_id = current_user.id
           @preschool.save
           redirect to("/preschools/#{@preschool.id}")
-      end
+      
     end
 
     patch '/preschools/:id' do            
@@ -46,7 +46,7 @@ class PreschoolsController < ApplicationController
         @preschool.save
           
         redirect to("/preschools/#{@preschool.id}")
-        end
+        
     end
 
     get '/preschools/:id' do
@@ -71,9 +71,5 @@ class PreschoolsController < ApplicationController
         	redirect to '/preschools'
       		
   	end
-
- 
-
-  	
 
 end
